@@ -35,15 +35,16 @@ module.exports = {
                 pbx_adresse1_fact: data.address1,
                 pbx_adresse2_fact: data.address2 || '',
                 pbx_zipcode_fact: data.zipCode,
+                pbx_city_fact: data.city,
                 pbx_country_fact: '250',
                 pbx_mobile_phone: data.mobilePhone,
                 pbx_mobile_country_code: data.mobileCountryCode,
                 pbx_nb_produit: data.numProducts,
                 pbx_repondre_a: websiteData[0].url_repondre,
                 pbx_retour: websiteData[0].url_retoure,
-                pbx_effectue: `http://localhost:3000/payment/success`,
-                pbx_annule: `http://localhost:3000/payment/cancelled`,
-                pbx_refuse: `http://localhost:3000/payment/refused`,
+                pbx_effectue: websiteData[0].url_effectue,
+                pbx_annule: websiteData[0].url_annule,
+                pbx_refuse: websiteData[0].url_refuse,
                 hmac: websiteData[0].hmac
             };
             console.log("eTransactionData=======================>", eTransactionData)
@@ -61,7 +62,6 @@ module.exports = {
             return ctx.send({
                 status: 'success',
                 paymentForm: phpResponse.data,
-                reference: data.orderRef
             });
 
         } catch (error) {
